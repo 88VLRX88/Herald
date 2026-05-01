@@ -1,0 +1,87 @@
+{
+  "workspace": ".",
+  "agent": {
+    "mode": "coder",
+    "mode_dirs": [
+      ".Herald/modes"
+    ]
+  },
+  "brain": {
+    "enabled": true,
+    "directory": ".Herald",
+    "index_file": "index.md",
+    "allow_write": true,
+    "max_note_chars": 20000,
+    "max_list_entries": 100
+  },
+  "plugins": {
+    "enabled": true,
+    "directories": [
+      "plugins"
+    ],
+    "data_directory": ".Herald/plugin-data"
+  },
+  "llm": {
+    "api_base": "http://127.0.0.1:1234/v1/chat/completions",
+    "api_token": "12",
+    "api_token_env": "12",
+    "model": "omnicoder-9b",
+    "temperature": 0.2,
+    "max_tokens": 1200,
+    "timeout_seconds": 60,
+    "response_format_json": false
+  },
+  "limits": {
+    "max_steps": 12,
+    "max_observation_chars": 8000
+  },
+  "interface": {
+    "enabled": true,
+    "backend": "textual",
+    "show_banner": true,
+    "show_repairs": false,
+    "show_observations": false,
+    "observation_preview_chars": 700,
+    "wrap_width": 96
+  },
+  "chat": {
+    "enabled": true,
+    "max_turns": 100,
+    "max_context_chars": 12000
+  },
+  "tools": {
+    "execute": {
+      "enabled": true,
+      "allow_shell": true,
+      "allow_python": true,
+      "timeout_seconds": 30,
+      "max_output_chars": 12000,
+      "denylist": [
+        "rm -rf /",
+        "shutdown",
+        "reboot",
+        "mkfs",
+        "dd if=",
+        ":(){"
+      ]
+    },
+    "filesystem": {
+      "enabled": true,
+      "allow_write": true,
+      "allow_delete": true,
+      "max_read_bytes": 1000000,
+      "max_list_entries": 200
+    },
+    "websearch": {
+      "enabled": true,
+      "provider": "duckduckgo_html",
+      "api_url": "https://html.duckduckgo.com/html/",
+      "api_token": "PUT_WEBSEARCH_TOKEN_HERE_IF_PROVIDER_NEEDS_IT",
+      "api_token_env": "HERALD_WEBSEARCH_TOKEN",
+      "verify_ssl": true,
+      "insecure_ssl_fallback": true,
+      "max_results": 8,
+      "timeout_seconds": 20
+    }
+  }
+}

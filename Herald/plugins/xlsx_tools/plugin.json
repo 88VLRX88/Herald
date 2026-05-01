@@ -1,0 +1,45 @@
+{
+  "id": "xlsx_tools",
+  "name": "XLSX Tools",
+  "enabled": true,
+  "entrypoint": "plugin.py",
+  "description": "Read XLSX workbooks as CSV-friendly text and write workbook changes.",
+  "instructions": "Use xlsx_tools_list_sheets before working with an unknown workbook. Use xlsx_tools_preview_csv for small context, xlsx_tools_export_csv when the sheet should be inspected or edited as CSV, xlsx_tools_set_cell for targeted edits, and xlsx_tools_update_from_csv or xlsx_tools_create_from_csv when CSV content should become an XLSX workbook. CSV previews and exports include formulas by default: formula cells are formatted as '<calculated value> | <formula without leading equals sign>', for example '12 | A1+B1'. If the workbook has no cached calculated value, the left side is empty. Prefer writing changed workbooks to a new output_path unless the user explicitly asks to overwrite.",
+  "tools": [
+    {
+      "name": "xlsx_tools_list_sheets",
+      "function": "list_sheets",
+      "description": "xlsx_tools_list_sheets(path): list worksheets, visibility, and dimensions for an .xlsx/.xlsm workbook."
+    },
+    {
+      "name": "xlsx_tools_preview_csv",
+      "function": "preview_csv",
+      "description": "xlsx_tools_preview_csv(path, sheet=null, max_rows=30, max_cols=20, data_only=false, include_formulas=true): return a compact CSV preview. Formula cells use '<calculated value> | <formula without leading equals sign>', e.g. '12 | A1+B1'."
+    },
+    {
+      "name": "xlsx_tools_export_csv",
+      "function": "export_csv",
+      "description": "xlsx_tools_export_csv(path, sheet=null, output_dir=null, data_only=false, include_formulas=true): export one worksheet or all worksheets to UTF-8 CSV. Formula cells use '<calculated value> | <formula without leading equals sign>', e.g. '12 | A1+B1'."
+    },
+    {
+      "name": "xlsx_tools_set_cell",
+      "function": "set_cell",
+      "description": "xlsx_tools_set_cell(path, sheet, cell, value, output_path=null): set one cell and save an edited workbook."
+    },
+    {
+      "name": "xlsx_tools_update_from_csv",
+      "function": "update_from_csv",
+      "description": "xlsx_tools_update_from_csv(path, csv_path, sheet=null, output_path=null, clear_sheet=true, infer_types=true): replace or append worksheet rows from a CSV file."
+    },
+    {
+      "name": "xlsx_tools_create_from_csv",
+      "function": "create_from_csv",
+      "description": "xlsx_tools_create_from_csv(csv_path, output_path, sheet='Sheet1', infer_types=true): create a new XLSX workbook from a CSV file."
+    }
+  ],
+  "config": {
+    "default_export_dir": "exports",
+    "default_preview_rows": 30,
+    "default_preview_cols": 20
+  }
+}
